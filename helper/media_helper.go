@@ -46,30 +46,28 @@ func ImageUploadHelper(input interface{}) (string, string, error) {
 	originURL := ""
 
 	if resp.Width > resp.Height {
-		updateResp, err := cld.Upload.Explicit(ctx, uploader.ExplicitParams{
-			PublicID: publicIdImage,
-			Type:     "upload",
-			Eager:    "c_pad,w_1920"})
+		qsImg, err := cld.Image(publicIdImage)
 		if err != nil {
 			return "", "", err
-		} else {
-			// Log the new tag to the console.
-			io.WriteString(w, "New tag: ")
-			fmt.Printf("%s\n", updateResp.URL)
-			originURL = updateResp.URL
+		}
+
+		// Add the transformation
+		qsImg.Transformation = "c_pad,w_1920"
+		originURL, err = qsImg.String()
+		if err != nil {
+			return "", "", err
 		}
 	} else {
-		updateResp, err := cld.Upload.Explicit(ctx, uploader.ExplicitParams{
-			PublicID: publicIdImage,
-			Type:     "upload",
-			Eager:    "c_pad,h_1920"})
+		qsImg, err := cld.Image(publicIdImage)
 		if err != nil {
 			return "", "", err
-		} else {
-			// Log the new tag to the console.
-			io.WriteString(w, "New tag 2: ")
-			fmt.Printf("%s\n", updateResp.Tags)
-			originURL = updateResp.URL
+		}
+
+		// Add the transformation
+		qsImg.Transformation = "c_pad,h_1920"
+		originURL, err = qsImg.String()
+		if err != nil {
+			return "", "", err
 		}
 	}
 
