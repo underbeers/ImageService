@@ -11,7 +11,8 @@ var (
 )
 
 type mediaUpload interface {
-	FileUpload(file models.File) (string, error)
+	FileUploadPet(file models.File) (string, string, error)
+	FileUploadUser(file models.File) (string, error)
 	RemoteUpload(url models.Url) (string, error)
 }
 
@@ -21,7 +22,23 @@ func NewMediaUpload() mediaUpload {
 	return &media{}
 }
 
-func (*media) FileUpload(file models.File) (string, error) {
+func (*media) FileUploadPet(file models.File) (string, string, error) {
+	//validate
+	err := validate.Struct(file)
+	if err != nil {
+		return "", "", err
+	}
+
+	//upload
+	originURL, thumbnailURL, err := helper.ImageUploadHelper(file.File)
+	if err != nil {
+		return "", "", err
+	}
+	return originURL, thumbnailURL, nil
+}
+
+func (*media) FileUploadUser(file models.File) (string, error) {
+
 	//validate
 	err := validate.Struct(file)
 	if err != nil {
@@ -29,11 +46,12 @@ func (*media) FileUpload(file models.File) (string, error) {
 	}
 
 	//upload
-	uploadUrl, err := helper.ImageUploadHelper(file.File)
+	uploadURL, err := helper.ImageUploadHelperUser(file.File)
 	if err != nil {
 		return "", err
 	}
-	return uploadUrl, nil
+	return uploadURL, nil
+
 }
 
 func (*media) RemoteUpload(url models.Url) (string, error) {
@@ -44,9 +62,9 @@ func (*media) RemoteUpload(url models.Url) (string, error) {
 	}
 
 	//upload
-	uploadUrl, errUrl := helper.ImageUploadHelper(url.Url)
+	originURL, _, errUrl := helper.ImageUploadHelper(url.Url)
 	if errUrl != nil {
 		return "", err
 	}
-	return uploadUrl, nil
+	return originURL, nil
 }

@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func FileUpload(c *fiber.Ctx) error {
+func FileUploadPet(c *fiber.Ctx) error {
 	//upload
 	formHeader, err := c.FormFile("file")
 	if err != nil {
@@ -31,7 +31,7 @@ func FileUpload(c *fiber.Ctx) error {
 			})
 	}
 
-	uploadUrl, err := services.NewMediaUpload().FileUpload(models.File{File: formFile})
+	originURL, thumbnailURL, err := services.NewMediaUpload().FileUploadPet(models.File{File: formFile})
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(
 			dtos.MediaDto{
@@ -45,7 +45,48 @@ func FileUpload(c *fiber.Ctx) error {
 		dtos.MediaDto{
 			StatusCode: http.StatusOK,
 			Message:    "success",
-			Data:       &fiber.Map{"data": uploadUrl},
+			Data:       &fiber.Map{"origin": originURL, "thumbnail": thumbnailURL},
+		})
+}
+
+func FileUploadUser(c *fiber.Ctx) error {
+	//upload
+	formHeader, err := c.FormFile("file")
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(
+			dtos.MediaDto{
+				StatusCode: http.StatusInternalServerError,
+				Message:    "error",
+				Data:       &fiber.Map{"data": "Select a file to upload"},
+			})
+	}
+
+	//get file from header
+	formFile, err := formHeader.Open()
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(
+			dtos.MediaDto{
+				StatusCode: http.StatusInternalServerError,
+				Message:    "error",
+				Data:       &fiber.Map{"data": err.Error()},
+			})
+	}
+
+	uploadURL, err := services.NewMediaUpload().FileUploadUser(models.File{File: formFile})
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(
+			dtos.MediaDto{
+				StatusCode: http.StatusInternalServerError,
+				Message:    "error",
+				Data:       &fiber.Map{"data": err.Error()},
+			})
+	}
+
+	return c.Status(http.StatusOK).JSON(
+		dtos.MediaDto{
+			StatusCode: http.StatusOK,
+			Message:    "success",
+			Data:       &fiber.Map{"origin": uploadURL},
 		})
 }
 

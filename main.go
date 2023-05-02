@@ -12,8 +12,8 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.JSON(&fiber.Map{"data": "Hello from Cloudinary"})
 	})
-	app.Post("/file", controllers.FileUpload)
-	app.Post("/remote", controllers.RemoteUpload)
+	app.Post("/filePet", controllers.FileUploadPet)
+	app.Post("/fileUser", controllers.FileUploadUser)
 
 	app.Listen("0.0.0.0:" + config.EnvPort())
 }
