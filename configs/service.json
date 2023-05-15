@@ -3,18 +3,18 @@
   "label": "pl_image_service",
   "endpoints": [
     {
-      "url": "/hello",
+      "url": "helloImage",
       "protected": false,
       "methods": ["GET"]
     },
     {
-      "url": "/file",
-      "protected": true,
+      "url": "filePet",
+      "protected": false,
       "methods": ["POST", "OPTIONS"]
     },
     {
-      "url": "/remote",
-      "protected": true,
+      "url": "fileUser",
+      "protected": false,
       "methods": ["POST", "OPTIONS"]
     }
   ]

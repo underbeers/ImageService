@@ -54,7 +54,7 @@ func helloAPIGateway() error {
 
 	log.Printf("connection gateway url %s", gatewayURL.String())
 
-	info := &models.Hello{
+	info := &models.Service{
 		Name:      "image",
 		Port:      config.EnvPort(),
 		IP:        config.EnvIP(),

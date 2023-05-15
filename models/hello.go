@@ -1,8 +1,9 @@
 package models
 
-type Hello struct {
+type Service struct {
 	Name      string     `json:"name"`
 	Port      string     `json:"port"`
+	Label     string     `json:"label"`
 	IP        string     `json:"ip"`
 	Endpoints []Endpoint `json:"endpoints"`
 }
