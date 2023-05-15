@@ -1,0 +1,21 @@
+{
+  "name": "image",
+  "label": "pl_image_service",
+  "endpoints": [
+    {
+      "url": "/hello",
+      "protected": false,
+      "methods": ["GET"]
+    },
+    {
+      "url": "/file",
+      "protected": true,
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "url": "/remote",
+      "protected": true,
+      "methods": ["POST", "OPTIONS"]
+    }
+  ]
+}

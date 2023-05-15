@@ -45,3 +45,27 @@ func EnvPort() string {
 	}
 	return os.Getenv("IMAGESERVICE_PORT")
 }
+
+func EnvIP() string {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	return os.Getenv("IMAGESERVICE_IP")
+}
+
+func EnvGWPort() string {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	return os.Getenv("GATEWAY_PORT")
+}
+
+func EnvGWIP() string {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	return os.Getenv("GATEWAY_IP")
+}
