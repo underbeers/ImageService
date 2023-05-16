@@ -1,0 +1,21 @@
+{
+  "name": "image",
+  "label": "pl_image_service",
+  "endpoints": [
+    {
+      "url": "helloImage",
+      "protected": true,
+      "methods": ["GET"]
+    },
+    {
+      "url": "filePet",
+      "protected": true,
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "url": "fileUser",
+      "protected": false,
+      "methods": ["POST", "OPTIONS"]
+    }
+  ]
+}
