@@ -4,12 +4,12 @@
   "endpoints": [
     {
       "url": "helloImage",
-      "protected": false,
+      "protected": true,
       "methods": ["GET"]
     },
     {
       "url": "filePet",
-      "protected": false,
+      "protected": true,
       "methods": ["POST", "OPTIONS"]
     },
     {
