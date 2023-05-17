@@ -1,71 +1,47 @@
 package configs
 
 import (
-	"github.com/joho/godotenv"
 	"log"
 	"os"
 )
 
 func EnvCloudName() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	return os.Getenv("CLOUDINARY_CLOUD_NAME")
+	return getEnv("CLOUDINARY_CLOUD_NAME")
 }
 
 func EnvCloudAPIKey() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	return os.Getenv("CLOUDINARY_API_KEY")
+	return getEnv("CLOUDINARY_API_KEY")
 }
 
 func EnvCloudAPISecret() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	return os.Getenv("CLOUDINARY_API_SECRET")
+	return getEnv("CLOUDINARY_API_SECRET")
 }
 
 func EnvCloudUploadFolder() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	return os.Getenv("CLOUDINARY_UPLOAD_FOLDER")
+	return getEnv("CLOUDINARY_UPLOAD_FOLDER")
 }
 
 func EnvPort() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	return os.Getenv("IMAGESERVICE_PORT")
+	return getEnv("IMAGESERVICE_PORT")
 }
 
 func EnvIP() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	return os.Getenv("IMAGESERVICE_IP")
+	return getEnv("IMAGESERVICE_IP")
 }
 
 func EnvGWPort() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	return os.Getenv("GATEWAY_PORT")
+	return getEnv("GATEWAY_PORT")
 }
 
 func EnvGWIP() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	return getEnv("GATEWAY_IP")
+}
+
+func getEnv(key string) string {
+	if value, exists := os.LookupEnv(key); exists {
+		return value
 	}
-	return os.Getenv("GATEWAY_IP")
+
+	log.Default().Printf("failed to get env %s\n", key)
+	return ""
 }
