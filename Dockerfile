@@ -10,6 +10,8 @@ RUN go build -o /build/image_service /build/cmd/main.go
 FROM alpine:latest
 
 WORKDIR /app
+COPY ./configs/service.json ./configs/service.json
+COPY ./service.json ./service.json
 COPY --from=build /build/image_service .
 
 ENV CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME
