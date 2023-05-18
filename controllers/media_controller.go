@@ -45,7 +45,7 @@ func FileUploadPet(c *fiber.Ctx) error {
 		dtos.MediaDto{
 			StatusCode: http.StatusOK,
 			Message:    "success",
-			Data:       &fiber.Map{"origin": originURL, "thumbnail": thumbnailURL},
+			Data:       &fiber.Map{"original": originURL, "thumbnail": thumbnailURL},
 		})
 }
 
@@ -86,7 +86,7 @@ func FileUploadUser(c *fiber.Ctx) error {
 		dtos.MediaDto{
 			StatusCode: http.StatusOK,
 			Message:    "success",
-			Data:       &fiber.Map{"origin": uploadURL},
+			Data:       &fiber.Map{"original": uploadURL},
 		})
 }
 
@@ -117,6 +117,6 @@ func RemoteUpload(c *fiber.Ctx) error {
 		dtos.MediaDto{
 			StatusCode: http.StatusOK,
 			Message:    "success",
-			Data:       &fiber.Map{"data": uploadUrl},
+			Data:       &fiber.Map{"original": uploadUrl},
 		})
 }
