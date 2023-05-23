@@ -52,7 +52,7 @@ func ImageUploadHelper(input interface{}) (string, string, error) {
 		}
 
 		// Add the transformation
-		qsImg.Transformation = "c_pad,w_1920"
+		qsImg.Transformation = "w_1920"
 		originURL, err = qsImg.String()
 		if err != nil {
 			return "", "", err
@@ -64,7 +64,7 @@ func ImageUploadHelper(input interface{}) (string, string, error) {
 		}
 
 		// Add the transformation
-		qsImg.Transformation = "c_pad,h_1920"
+		qsImg.Transformation = "h_1920"
 		originURL, err = qsImg.String()
 		if err != nil {
 			return "", "", err
@@ -78,7 +78,7 @@ func ImageUploadHelper(input interface{}) (string, string, error) {
 	}
 
 	// Add the transformation
-	qsImg.Transformation = "c_pad,h_200"
+	qsImg.Transformation = "h_200"
 
 	// Generate and log the delivery URL
 	thumbnailURL, err := qsImg.String()
