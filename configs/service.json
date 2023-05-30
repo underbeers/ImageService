@@ -9,7 +9,7 @@
     },
     {
       "url": "filePet",
-      "protected": true,
+      "protected": false,
       "methods": ["POST", "OPTIONS"]
     },
     {
